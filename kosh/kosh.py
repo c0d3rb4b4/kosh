@@ -1,3 +1,4 @@
+import gc
 from configparser import ConfigParser
 from distutils.util import strtobool
 from importlib import import_module as mod
@@ -94,6 +95,8 @@ class kosh():
 
     instance.server = process(daemon = True, name = 'server')
     instance.server.start()
+    # force mem release
+    gc.collect()
 
   def watch(self) -> None:
     '''
