@@ -51,6 +51,18 @@ class entry():
 
         return entry(*args, **kwargs)
 
+    def get_id(self, id_xpath):
+        for id in id_xpath:
+            if isinstance(id, etree._Element) and id.text is not None:
+                id = normalize('NFC', id.text)
+                return id
+            elif isinstance(id, etree._ElementUnicodeResult):
+                id = normalize('NFC', id)
+                return id
+            else:
+                id = sha1(elem.encode('utf-8')).hexdigest()
+                return id
+
     def __record(self, root: etree.Element) -> Document:
         '''
                todo: docs
