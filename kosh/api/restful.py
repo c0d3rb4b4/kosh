@@ -53,6 +53,7 @@ class restful(_api):
     field = request.args.get('field')
     query = request.args.get('query')
     query_type = request.args.get('query_type')
+    offset = request.args.get('offset')
     size = request.args.get('size')
 
     if not query:
@@ -64,6 +65,7 @@ class restful(_api):
 
     return self.__data(search.entries(
       self.elex, field, query, query_type,
+      int(offset) if offset else 0,
       int(size) if size else 10
     ))
 
@@ -130,6 +132,7 @@ class restful(_api):
               { **param('field'), 'enum': list(self.emap.keys()) },
               { **param('query') },
               { **param('query_type'), 'enum': [i.name for i in querytypes] },
+              { **param('offset'), 'required': False, 'type': 'integer' },
               { **param('size'), 'required': False, 'type': 'integer' }
             ],
             'responses': reply('Entries')

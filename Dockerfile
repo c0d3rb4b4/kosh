@@ -1,4 +1,4 @@
-# cceh/kosh
+# c0d3rb4b4/kosh
 FROM alpine:latest
 ADD . /tmp/kosh
 RUN \
