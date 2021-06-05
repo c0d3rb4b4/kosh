@@ -49,5 +49,5 @@ class search():
       **item.to_dict(),
       'id': item.meta.id,
       'created': datetime(*map(int, split(r'\D', item.created)))
-    }) for item in find[offset:size].execute()]
+    }) for item in find[offset:offset+size].execute()]
     except: return []
